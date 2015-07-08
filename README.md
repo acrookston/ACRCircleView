@@ -1,6 +1,8 @@
 # ACRCircleView
 
-Just throwing this up temporarily. Theres' no Cocoapod yet but that will be added in time.
+A simple Swift UIView class using CAShapeLayer to create pie charts or circular progress bars.
+
+Just throwing this up temporarily. There is no Cocoapod yet but that will be added in time.
 
 ## Example output
 
