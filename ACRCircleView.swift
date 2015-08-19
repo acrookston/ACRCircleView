@@ -61,7 +61,24 @@ class ACRCircleView: UIView {
         configure()
     }
 
-    func configure() {
+    func startAnimating() {
+        var animation = CABasicAnimation(keyPath: "transform.rotation.z")
+        animation!.fromValue = 0.0
+        animation!.toValue = 2 * M_PI
+        // this might be too fast
+        animation!.duration = 1
+        // HUGE_VALF is defined in math.h so import it
+        animation!.repeatCount = Float.infinity
+        circlePathLayer.addAnimation(animation, forKey: "rotation")
+    }
+
+    func stopAnimating() {
+        circlePathLayer.removeAnimationForKey("rotation")
+    }
+
+    // MARK: Internal
+
+    private func configure() {
 
         basePathLayer.frame = bounds
         basePathLayer.lineWidth = strokeWidth
@@ -83,7 +100,7 @@ class ACRCircleView: UIView {
         progress = 0
     }
 
-    func circleFrame() -> CGRect {
+    private func circleFrame() -> CGRect {
         // keep the circle inside the bounds
         let shorter = (bounds.width > bounds.height ? bounds.height : bounds.width) - strokeWidth
         var circleFrame = CGRect(x: 0, y: 0, width: shorter, height: shorter)
@@ -92,7 +109,7 @@ class ACRCircleView: UIView {
         return circleFrame
     }
 
-    func circlePath() -> UIBezierPath {
+    private func circlePath() -> UIBezierPath {
         return UIBezierPath(ovalInRect: circleFrame())
     }
 
